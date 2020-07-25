@@ -23,21 +23,32 @@ namespace LoggingKata.Test
 
         [Theory]
         [InlineData("34.073638, -84.677017, Taco Bell Acwort...", -84.677017)]
-        public void ShouldParseLongitude(string line, double expected)
+        public void ShouldParseAll(string line, double longitude)
         {
-            // TODO: Complete - "line" represents input data we will Parse to
-            //       extract the Longitude.  Your .csv file will have many of these lines,
-            //       each representing a TacoBell location
-
+            
             //Arrange
-
+            var tacoParser = new TacoParser();
             //Act
-
+            var actual = tacoParser.Parse(line);
             //Assert
+            Assert.Equal(actual.Location.Longitude, longitude);
+            //Since the Actual is a LoggingKata.ITracable it needs to be connected.
         }
 
 
         //TODO: Create a test ShouldParseLatitude
+        [Theory]
+        [InlineData("34.073638, -84.677017, Taco Bell Acwort...", 34.073638)]
+        public void ShouldParseLatitude(string line, double latitude)
+        {
+            
+            //Arrange
+            var tacoParser = new TacoParser();
+            //Act
+            var actual = tacoParser.Parse(line);
+            //Assert
+            Assert.Equal(actual.Location.Latitude, latitude);
+        }
 
     }
 }
